@@ -1,8 +1,8 @@
 # Social Network
 
 ## Description
-AS A social media startup
-I WANT an API for my social network that uses a NoSQL database
+AS A social media startup <br>
+I WANT an API for my social network that uses a NoSQL database <br>
 SO THAT my website can handle large amounts of unstructured data
 
 GIVEN a social network API <br>
