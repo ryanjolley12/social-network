@@ -4,20 +4,13 @@
   "private": true,
   "description": "",
   "main": "server.js",
-  
   "scripts": {
     "start": "node server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ryanjolley12/social-network.git"
-  },
-  
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
-    "mongoose": "^6.0.5"
+    "express": "^4.17.1"
   }
 }
