@@ -12,7 +12,7 @@ const userController = {
     //         res.sendStatus(400).json(err);
     //     });
     // },
-    .then((dbuserData) => res.json(dbuserData))
+    .then((dbUserData) => res.json(dbUserData))
     .catch((err) => {
       console.log(err);
       res.sendStatus(400);
@@ -69,16 +69,16 @@ const userController = {
     // DELETE USER 
     deleteUser({ params }, res) {
         User.findOneAndDelete({ _id: params.id })
-        .then((dbuserData) => {
-          if (!dbuserData) {
+        .then((dbUserData) => {
+          if (!dbUserData) {
             res.status(404).json({ message: "No user found with this id!" });
             return;
           }
-          res.json(dbuserData);
+          res.json(dbUserData);
         })
           .catch((err) => res.status(400).json(err));
       },
-      
+
     //  ADD FRIEND   
     addFriend({ params }, res) {
         User.findOneAndUpdate({ _id: params.userId }, { $push: { friends: params.friendId } }, {new: true, runValidators: true })

@@ -1,12 +1,18 @@
 {
-  "name": "18-nosql",
+  "name": "social-network",
   "version": "1.0.0",
   "private": true,
   "description": "",
   "main": "server.js",
+  
   "scripts": {
     "start": "node server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryanjolley12/social-network.git"
+  },
+  
   "keywords": [],
   "author": "",
   "license": "ISC",
