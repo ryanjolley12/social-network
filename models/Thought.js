@@ -33,8 +33,6 @@ const ReplySchema = new Schema(
   );
   
 
-
-
 const ThoughtSchema = new Schema(
     {
     thoughtText {
