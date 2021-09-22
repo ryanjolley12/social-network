@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const dateFormat = require('../utils/dateFormat');
+// const dateFormat = require('../utils/dateFormat');
 
 const UserSchema = new Schema(
     {
@@ -10,16 +10,26 @@ const UserSchema = new Schema(
             trim: true
         },
 
-        userEmail {
+        userEmail: {
             type: String,
             unique: true,
             required: true,
             // validation
+            validate: {
+              validator(trueEmail) {
+                return /.+@.+\..+/.test(trueEmail);
+              },
+              message: 'Please enter a valid email address'
+              }
         },
+
         friends: [
+          {
             type: Schema.Types.ObjectId,
             ref: 'User'
+          }
         ],
+
         thoughts: [
             {
               type: Schema.Types.ObjectId,
@@ -35,17 +45,16 @@ const UserSchema = new Schema(
           // prevents virtuals from creating duplicate of _id as `id`
           id: false
         }
-      );
+      )
       
-
 
 
 // get total count of friends on retrieval
 UserSchema.virtual('friendCount').get(function() {
-    return this.friends.reduce(
-      (total, friends) => total + friends.length + 1,
-      0
-    );
+    return this.friends.length;
+
   });
+
+  const User = model('User', UserSchema)
 
 module.exports = User;

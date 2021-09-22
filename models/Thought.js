@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
-const Thought = model('Thought', ThoughtSchema);
+// const Thought = model('Thought', ThoughtSchema);
 
 const ReplySchema = new Schema(
     {
@@ -12,9 +12,10 @@ const ReplySchema = new Schema(
       },
       replyBody: {
         type: String,
-        required: true
+        required: true,
+        maxLength: 280
       },
-      writtenBy: {
+      username: {
         type: String,
         required: true,
         trim: true
@@ -35,25 +36,22 @@ const ReplySchema = new Schema(
 
 const ThoughtSchema = new Schema(
     {
-    thoughtText {
+    thoughtText: {
         Type: String,
         required: true,
         // 1-280 characters
+        minLength: 1,
+        maxLength: 280
     },
 
-    createdAt {
+    createdAt: {
         type: Date,
         default: Date.now,
         get: createdAtVal => dateFormat(createdAtVal)
     },
 
-    userName {
-        type: String,
-        required: true,
-    },
-
     // use ReplySchema to validate data for a reply
-    reactions [ReplySchema]
+    reactions: [ReplySchema]
 },
 {
   toJSON: {
@@ -63,5 +61,10 @@ const ThoughtSchema = new Schema(
   id: false
 }
 );
+ThoughtSchema.virtual('reactionCount').get(function() {
+  return this.reactions.length;
+});
+
+const Thought = model('Thought', ThoughtSchema);
 
 module.exports = Thought;
